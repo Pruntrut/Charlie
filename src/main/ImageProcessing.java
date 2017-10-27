@@ -120,9 +120,17 @@ public final class ImageProcessing {
      * @see #getGray
      */
     public static double[][] toGray(int[][] image) {
-
-    	// TODO implement me !
-    	return new double[][]{};
+    	double[][] grayscale = new double[image.length][];
+    	
+    	for (int i = 0; i < image.length; i++) {
+    		grayscale[i] = new double[image[i].length];
+    		
+    		for (int j = 0; i < image[i].length; i++) {
+    			grayscale[i][j] = getGray(image[i][j]);
+    		}
+    	}
+    	
+    	return grayscale;
     }
 
     /**
