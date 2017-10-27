@@ -107,7 +107,7 @@ public final class ImageProcessing {
      */
     public static int getRGB(double gray) {
     	// TODO implement me !
-    	return -2; 
+    	return -3; 
     }
 
     /**
