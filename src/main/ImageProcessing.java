@@ -141,9 +141,14 @@ public final class ImageProcessing {
      * @see #getRGB(double)
      */
     public static int[][] toRGB(double[][] gray) {
-
-    	// TODO implement me !
-    	return new int[][]{};
+    	
+    	int [][] RGB = new int[gray.length][gray[0].length];
+    	for (int i = 0; i < gray.length; i++) {
+    		for (int j = 0; j < gray[i].length; j++) {
+    			RGB[i][j] = getRGB(gray[i][j]);
+    		}
+    	}
+    	return RGB;
     }
 
     
