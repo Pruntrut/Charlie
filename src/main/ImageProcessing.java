@@ -60,8 +60,8 @@ public final class ImageProcessing {
      * @see #getRGB(int)
      */
     public static double getGray(int rgb) {
-    	// TODO implement me !
-        return -2;
+    	
+        return (getRed(rgb) + getGreen(rgb) + getBlue(rgb))/3;
     }
 
     /**
