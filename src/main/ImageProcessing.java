@@ -10,14 +10,20 @@ public final class ImageProcessing {
      * @see #getRGB(int, int, int)
      */
     public static int getRed(int rgb) {
-
-    	// TODO implement me !
-    	return -2; 
+    	int red = rgb << 16;
+    	
+    	if (red > 255) {
+    		red = 255;
+    	} else if (red < 0){
+    		red = 0;
+    	}
+    	
+    	return red; 
     }
 
     /**
-     * Returns green component from given packed color.
-     * @param rgb : a 32-bits RGB color
+     * Returns green component from given packed colour.
+     * @param rgb : a 32-bits RGB colour
      * @return an integer between 0 and 255
      * @see #getRed
      * @see #getBlue
