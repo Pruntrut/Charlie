@@ -11,7 +11,7 @@ public final class ImageProcessing {
      */
     public static int getRed(int rgb) {
     	
-    	int red = rgb << 16;
+    	int red = rgb >> 16;
     	red = outOfLimit(red);    	
     	return red; 
     }
@@ -44,7 +44,7 @@ public final class ImageProcessing {
         
     public static int getBlue(int rgb) {
     	
-    	rgb = rgb & 0b11111111_11111111;
+    	rgb = rgb & 0b11111111;
     	rgb = outOfLimit(rgb);
     	return rgb; 
     }
