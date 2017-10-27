@@ -25,7 +25,13 @@ public final class ImageProcessing {
      */
     public static int getGreen(int rgb) {
     	// TODO implement me !
-    	return -2; 
+    	
+    	rgb = rgb >> 8;
+    	rgb = rgb << 10;
+    	return rgb; 
+    	
+    	
+    	
     }
 
     /**
@@ -36,9 +42,12 @@ public final class ImageProcessing {
      * @see #getGreen
      * @see #getRGB(int, int, int)
      */
+        
     public static int getBlue(int rgb) {
     	// TODO implement me !
-        return -2;
+    	
+    	rgb = rgb << 18;
+    	return rgb; 
     }
 
    
