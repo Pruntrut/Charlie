@@ -10,14 +10,9 @@ public final class ImageProcessing {
      * @see #getRGB(int, int, int)
      */
     public static int getRed(int rgb) {
+    	
     	int red = rgb << 16;
-    	
-    	if (red > 255) {
-    		red = 255;
-    	} else if (red < 0){
-    		red = 0;
-    	}
-    	
+    	red = outOfLimit(red);    	
     	return red; 
     }
 
@@ -33,6 +28,7 @@ public final class ImageProcessing {
     	
     	rgb = rgb >> 8;
     	rgb = rgb & 0b11111111;
+    	rgb = outOfLimit(rgb);
     	return rgb; 
     	
     }
@@ -49,6 +45,7 @@ public final class ImageProcessing {
     public static int getBlue(int rgb) {
     	
     	rgb = rgb & 0b11111111_11111111;
+    	rgb = outOfLimit(rgb);
     	return rgb; 
     }
 
@@ -78,8 +75,28 @@ public final class ImageProcessing {
      * @see #getBlue
      */
     public static int getRGB(int red, int green, int blue) {
-    	// TODO implement me !
-    	return -2; 
+    	red = outOfLimit(red);
+    	green = outOfLimit(green);
+    	blue = outOfLimit(blue);
+    	red = red << 16;
+    	green = green << 8;
+    	return red + green + blue; 
+    }
+    
+    /**
+     * If the number is smaller than 0, it is given the value 0.
+     * If the number is bigger than 255, it is given the value 255.
+     * @param number
+     * @return a number between 0 and 255
+     */
+    public static int outOfLimit(int number) {
+    	
+    	if (number < 0) {
+    		number = 0;
+    		} else if (number > 255) {
+    			number = 255;
+    		}
+    	return number;
     }
 
     /**
