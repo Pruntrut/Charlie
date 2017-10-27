@@ -11,7 +11,7 @@ public final class ImageProcessing {
      */
     public static int getRed(int rgb) {
     	
-    	int red = rgb << 16;
+    	int red = rgb >> 16;
     	red = outOfLimit(red);    	
     	return red; 
     }
@@ -44,7 +44,7 @@ public final class ImageProcessing {
         
     public static int getBlue(int rgb) {
     	
-    	rgb = rgb & 0b11111111_11111111;
+    	rgb = rgb & 0b11111111;
     	rgb = outOfLimit(rgb);
     	return rgb; 
     }
@@ -62,6 +62,22 @@ public final class ImageProcessing {
     public static double getGray(int rgb) {
     	
         return (getRed(rgb) + getGreen(rgb) + getBlue(rgb))/3;
+    }
+    
+    /**
+     * If the number is smaller than 0, it is given the value 0.
+     * If the number is bigger than 255, it is given the value 255.
+     * @param number
+     * @return a number between 0 and 255
+     */
+    public static int outOfLimit(int number) {
+    	
+    	if (number < 0) {
+    		number = 0;
+    		} else if (number > 255) {
+    			number = 255;
+    		}
+    	return number;
     }
 
     /**
@@ -83,21 +99,7 @@ public final class ImageProcessing {
     	return red + green + blue; 
     }
     
-    /**
-     * If the number is smaller than 0, it is given the value 0.
-     * If the number is bigger than 255, it is given the value 255.
-     * @param number
-     * @return a number between 0 and 255
-     */
-    public static int outOfLimit(int number) {
-    	
-    	if (number < 0) {
-    		number = 0;
-    		} else if (number > 255) {
-    			number = 255;
-    		}
-    	return number;
-    }
+    
 
     /**
      * Returns packed RGB components from given gray-scale value.
@@ -125,7 +127,7 @@ public final class ImageProcessing {
     	for (int i = 0; i < image.length; i++) {
     		grayscale[i] = new double[image[i].length];
     		
-    		for (int j = 0; i < image[i].length; i++) {
+    		for (int j = 0; j < image[i].length; j++) {
     			grayscale[i][j] = getGray(image[i][j]);
     		}
     	}
