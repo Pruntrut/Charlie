@@ -106,8 +106,10 @@ public final class ImageProcessing {
      * @see #getGray
      */
     public static int getRGB(double gray) {
-    	// TODO implement me !
-    	return -3; 
+    	
+    	int rgb = outOfLimit((int) gray);
+    	rgb = getRGB(rgb, rgb, rgb);
+    	return rgb; 
     }
 
     /**
