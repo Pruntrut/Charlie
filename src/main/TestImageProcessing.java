@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.print.Printable;
+
 public class TestImageProcessing {
 
 	public static void main(String[] args) {
@@ -7,6 +9,7 @@ public class TestImageProcessing {
 		testGetRed();
 		testGetGreen();
 		testGetBlue();
+		testGetRGBArray();
 		testOutOfLimit();
 		testGetGray();
 		testGetRGB();
@@ -53,6 +56,26 @@ public class TestImageProcessing {
     		System.out.println("Test failed. Returned value = " + blue + " Expected value = " + ref);
     	}
     	
+	}
+	
+	public static void testGetRGBArray() {
+		
+		int color = 0b11110000_00001111_01010101;
+		int[] ref = {0b11110000, 0b00001111, 0b01010101};
+		int[] rgbArray = ImageProcessing.getRGBArray(color);
+		
+		boolean fail = false;
+		
+		for (int i = 0; i < rgbArray.length; i++) {
+			if (rgbArray[i] != ref[i]) {
+				System.out.println("Test failed. Returned value = " + rgbArray[i] + " Expected value = " + ref[i]);
+				fail = true;
+			}
+		}
+		
+		if (!fail) {
+			System.out.println("Test passed");
+		}
 	}
 	
 	public static void testGetGray() {

@@ -9,9 +9,16 @@ public class DistanceBasedSearch {
 	 * @return a double, the value of the error for the RGB pixel pair. (an integer in [0, 255])
 	 */
 	public static double pixelAbsoluteError(int patternPixel, int imagePixel) {
-
-    	// TODO implement me !
-		return -2;
+		int[] patternRGBArray = ImageProcessing.getRGBArray(patternPixel);
+		int[] imageRGBArray = ImageProcessing.getRGBArray(imagePixel);
+		
+		double sum = 0.0;
+		
+		for (int i = 0; i < patternRGBArray.length; i++) {
+			sum += Math.abs(patternRGBArray[i] - imageRGBArray[i]);
+		}
+		
+		return (double)sum/(double)patternRGBArray.length;
 	}
 
 	/**
@@ -27,8 +34,16 @@ public class DistanceBasedSearch {
 	 * should return -1 if the denominator is -1
 	 */
 	public static double meanAbsoluteError(int row, int col, int[][] pattern, int[][] image) {
-
-    	// TODO implement me !
+		
+		double sum = 0.0;
+		
+		for (int i = 0; i < pattern.length; i++) {
+			for(int j = 0; j < pattern[i].length; j++) {
+				sum += 
+			}
+		
+		}
+		
 		return -2; 
 	}
 
