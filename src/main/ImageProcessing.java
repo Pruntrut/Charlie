@@ -48,6 +48,17 @@ public final class ImageProcessing {
     	rgb = outOfLimit(rgb);
     	return rgb; 
     }
+    
+    
+    /**
+     * Returns an array of length 3 with Red, Green, and Blue ints as its elements.
+     * @param rgb : 32-bits RGB color
+     * @return an integer array of length 3 [R,G,B]
+     */
+    public static int[] getRGBArray(int rgb) {
+    	int[] rgbArray = {getRed(rgb), getGreen(rgb), getBlue(rgb)};
+    	return rgbArray;
+	}
 
    
     /**
