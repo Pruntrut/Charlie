@@ -15,7 +15,7 @@ public class DistanceBasedSearch {
 		double sum = 0.0;
 		
 		for (int i = 0; i < patternRGBArray.length; i++) {
-			sum = Math.abs(patternRGBArray[i] - imageRGBArray[i]);
+			sum += Math.abs(patternRGBArray[i] - imageRGBArray[i]);
 		}
 		
 		return (double)sum/(double)patternRGBArray.length;
