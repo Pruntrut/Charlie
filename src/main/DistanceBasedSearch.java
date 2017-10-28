@@ -35,16 +35,23 @@ public class DistanceBasedSearch {
 	 */
 	public static double meanAbsoluteError(int row, int col, int[][] pattern, int[][] image) {
 		
+		assert pattern.length <= image.length && pattern[0].length <= image[0].length;
+		
 		double sum = 0.0;
+		int pixelNumber = 0;
 		
 		for (int i = 0; i < pattern.length; i++) {
 			for(int j = 0; j < pattern[i].length; j++) {
-				sum += 
+				sum += pixelAbsoluteError(pattern[i][j], image[row + i][col + j]);
+				
+				pixelNumber++;
 			}
-		
 		}
 		
-		return -2; 
+		assert pixelNumber > 0;
+    	
+		return (1/pixelNumber) * sum;
+		
 	}
 
 	/**
