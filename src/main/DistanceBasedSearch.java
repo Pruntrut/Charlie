@@ -35,6 +35,7 @@ public class DistanceBasedSearch {
 	 */
 	public static double meanAbsoluteError(int row, int col, int[][] pattern, int[][] image) {
 		
+		assert hasAtLeastOneElem(pattern) && hasAtLeastOneElem(image);
 		assert pattern.length <= image.length && pattern[0].length <= image[0].length;
 		
 		double sum = 0.0;
@@ -63,8 +64,49 @@ public class DistanceBasedSearch {
 	 * placed over this pixel (upper-left corner) 
 	 */
 	public static double[][] distanceMatrix(int[][] pattern, int[][] image) {
-
-    	// TODO implement me !
-		return new double[][]{}; 
+		
+		assert hasAtLeastOneElem(pattern) && hasAtLeastOneElem(pattern);
+		assert pattern.length <= image.length && pattern[0].length <= image[0].length;
+		
+		double[][] distances = new double[image.length][image[0].length];
+		
+		for (int i = 0; i <= image.length - pattern.length; i++) {
+			for (int j = 0; j <= image[i].length - pattern[i].length; j++) {
+				distances[i][j] = meanAbsoluteError(i, j, pattern, image);
+			}
+		}
+    	
+		return distances;
+	}
+	
+	/**
+	 * Returns true if given 2D array has at least one element
+	 * @param array : a 2D integer array
+	 * @return a boolean
+	 */
+	public static boolean hasAtLeastOneElem(int[][] array) {
+		return array.length >= 1 && array[0].length >= 1;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
