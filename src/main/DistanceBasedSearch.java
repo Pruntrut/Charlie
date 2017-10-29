@@ -51,7 +51,7 @@ public class DistanceBasedSearch {
 		
 		assert pixelNumber > 0;
     	
-		return (1/pixelNumber) * sum;
+		return (1/(double)pixelNumber) * sum;
 		
 	}
 
@@ -68,10 +68,10 @@ public class DistanceBasedSearch {
 		assert hasAtLeastOneElem(pattern) && hasAtLeastOneElem(pattern);
 		assert pattern.length <= image.length && pattern[0].length <= image[0].length;
 		
-		double[][] distances = new double[image.length][image[0].length];
+		double[][] distances = new double[image.length - pattern.length + 1][image[0].length - pattern[0].length + 1];
 		
-		for (int i = 0; i <= image.length - pattern.length; i++) {
-			for (int j = 0; j <= image[i].length - pattern[i].length; j++) {
+		for (int i = 0; i < distances.length; i++) {
+			for (int j = 0; j < distances[i].length; j++) {
 				distances[i][j] = meanAbsoluteError(i, j, pattern, image);
 			}
 		}

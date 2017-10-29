@@ -174,7 +174,7 @@ public final class ImageProcessing {
      * @return an 2D integer array, containing a RGB mapping of the matrix 
      */
     public static int[][] matrixToRGBImage(double[][] matrix, double min, double max) {
-    	// TODO implement me !
+    	
     	return new int[][]{};
     }
 }
