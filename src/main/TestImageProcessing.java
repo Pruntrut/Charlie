@@ -1,7 +1,5 @@
 package main;
 
-import java.awt.print.Printable;
-
 public class TestImageProcessing {
 
 	public static void main(String[] args) {
