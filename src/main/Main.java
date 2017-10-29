@@ -2,7 +2,7 @@ package main;
 
 /**
  * 
- * @author Name of the students
+ * @author Leandro Graziano, Luca Bataillard
  *
  *	Where is Charlie Project 
  *
@@ -19,10 +19,10 @@ public final class Main {
     public static void main(String[] args) {
     	testGetRed();
     	testGrayscale();
-    	testFindNBest();
-    	testDistanceBasedSearch();
-    	testSimilarityBasedSearch();   
-    	findCharlie();
+    	//testFindNBest();
+    	//testDistanceBasedSearch();
+    	//testSimilarityBasedSearch();   
+    	//findCharlie();
     }
     
     /*
