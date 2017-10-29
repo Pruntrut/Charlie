@@ -174,7 +174,17 @@ public final class ImageProcessing {
      * @return an 2D integer array, containing a RGB mapping of the matrix 
      */
     public static int[][] matrixToRGBImage(double[][] matrix, double min, double max) {
+    	assert matrix.length >= 1 && matrix[0].length >= 1;
     	
-    	return new int[][]{};
+    	int[][] rgb = new int[matrix.length][matrix[0].length];
+    	
+    	for (int i = 0; i < rgb.length; i++) {
+    		for (int j = 0; j < rgb[i].length; j++) {
+    			double g = (matrix[i][j] - min)/(max - min) * 255;	
+    			rgb[i][j] = getRGB(g);
+    		}
+    	}
+    	
+    	return rgb;
     }
 }
