@@ -12,7 +12,6 @@ public class Collector {
 	 * @return an array of two integer coordinates, row first and then column
 	 */
 	public static int[] findBest(double[][] matrix, boolean smallestFirst) {
-		
 		assert matrix.length > 0 && matrix[0].length > 0;
 		
 		double min = Double.POSITIVE_INFINITY;
@@ -56,8 +55,26 @@ public class Collector {
 	 * @return an array of size n containing row, column-coordinate pairs
 	 */
 	public static int[][] findNBest(int n, double[][] matrix, boolean smallestFirst) {
+		assert matrix.length > 0 && matrix[0].length > 0;
 		
-		return new int[][]{};
+		double[][] copy = copyMatrix(matrix);
+		double extreme;
+		int[][] bestArray = new int[n][];
+		
+		if (smallestFirst) {
+			extreme = Double.POSITIVE_INFINITY;
+		} else {
+			extreme = Double.NEGATIVE_INFINITY;
+		}
+		
+		for (int i = 0; i < n; i++) {
+			int[] best = findBest(copy, smallestFirst);
+			bestArray[i] = best;
+			copy[best[0]][best[1]] = extreme;
+		}
+		
+		
+		return bestArray;
 	}
 	
 	
@@ -93,5 +110,25 @@ public class Collector {
 
     	// TODO implement me correctly for underpriced bonus!
 		return new int[][]{};
+	}
+	
+	/**
+	 * Deep copies a 2D Matrix
+	 * @param matrix
+	 * @return A deep copy of matrix
+	 */
+	public static double[][] copyMatrix(double[][] matrix) {
+		double[][] copy = new double[matrix.length][];
+		
+		for (int i = 0; i < matrix.length; i++) {
+			copy[i] = new double[matrix[i].length];
+			
+			for (int j = 0; j < matrix[i].length; j++) {
+				copy[i][j] = matrix[i][j];
+			}
+		}
+		
+		return copy;
+		
 	}
 }
