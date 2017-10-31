@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Collector {
 
@@ -11,9 +12,39 @@ public class Collector {
 	 * @return an array of two integer coordinates, row first and then column
 	 */
 	public static int[] findBest(double[][] matrix, boolean smallestFirst) {
-
-    	// TODO implement me !
-		return new int[]{};
+		
+		assert matrix.length > 0 && matrix[0].length > 0;
+		
+		double min = Double.POSITIVE_INFINITY;
+		double max = Double.NEGATIVE_INFINITY;
+		int[] minCoords = new int[2];
+		int[] maxCoords = new int[2];
+		
+		
+		for (int i = 0; i  < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				double elem = matrix[i][j];
+				
+				if (elem  < min) {
+					min = elem;
+					minCoords[0] = i;
+					minCoords[1] = j;
+				} 
+				
+				if (elem > max) {
+					max = elem;
+					maxCoords[0] = i;
+					maxCoords[1] = j;
+				}
+			}
+		}
+		
+		if (smallestFirst) {
+			return minCoords;
+		} else {
+			return maxCoords;
+		}
+		
 	}
 
 	
@@ -25,8 +56,7 @@ public class Collector {
 	 * @return an array of size n containing row, column-coordinate pairs
 	 */
 	public static int[][] findNBest(int n, double[][] matrix, boolean smallestFirst) {
-
-    	// TODO implement me !
+		
 		return new int[][]{};
 	}
 	
