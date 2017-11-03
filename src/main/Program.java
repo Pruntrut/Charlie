@@ -6,8 +6,8 @@ public class Program {
 		// TODO Auto-generated method stub
 
 		//must change path
-		int[][] pattern = Helper.read("C:\\Users\\Leandro\\Downloads\\charlie\\images\\pattern.png");
-		int[][] array = Helper.read("C:\\Users\\Leandro\\Downloads\\charlie\\images\\image.png");
+		int[][] pattern = Helper.read("images/charlie.png");
+		int[][] array = Helper.read("images/charlie_beach.png");
 		double[][] distance = DistanceBasedSearch.distanceMatrix(pattern, array);
 		int[] coords = Collector.findBest(distance, true);
 		System.out.println(coords[0]);
