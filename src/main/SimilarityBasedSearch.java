@@ -8,6 +8,9 @@ public class SimilarityBasedSearch {
 	 * @return a double value between 0 and 255 which is the mean value
 	 */
 	public static double mean(double[][] image) {
+		
+		assert image.length > 0 && image[0].length > 0;
+		
 		double mean = 0;
 		for (int i = 0; i < image.length; i++) {
 			for (int j = 0; j < image[0].length; j++) {
@@ -29,14 +32,17 @@ public class SimilarityBasedSearch {
 	 * @return a double value between 0 and 255 which is the mean value
 	 */
 	static double windowMean(double[][] image, int row, int col, int width, int height) {
-		double mean = 0;
+		
+		assert image.length > 0 && image[0].length > 0;
+		
+		double avg = 0;
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				mean = mean + image[i + col][j + row];
+				avg = avg + image[i + row][j + col];
 			}
 		}
-		mean = mean/(width*height);
-		return mean;
+		avg = avg/(width*height);
+		return avg;
 	}
 	
 	
@@ -52,6 +58,9 @@ public class SimilarityBasedSearch {
 	 * should return -1 if the denominator is 0
 	 */
 	public static double normalizedCrossCorrelation(int row, int col, double[][] pattern, double[][] image) {
+		
+		assert pattern.length > 0 && pattern[0].length > 0;
+		assert image.length > 0 && image[0].length > 0;
 		
 		double imageMean = windowMean(image, row, col, pattern.length, pattern[0].length);
 		double patternMean = mean(pattern);
@@ -91,8 +100,19 @@ public class SimilarityBasedSearch {
 	 */
 	public static double[][] similarityMatrix(double[][] pattern, double[][] image) {
 		
-		// TODO implement me !
-		return new double[][]{}; 
+		assert pattern.length > 0 && pattern[0].length > 0;
+		assert image.length > 0 && image[0].length > 0;
+		assert pattern.length <= image.length && pattern[0].length <= image[0].length;	
+		
+		double[][] similarities = new double[image.length - pattern.length + 1][image[0].length - pattern[0].length + 1];
+		
+		for (int i = 0; i < similarities.length; i++) {
+			for (int j = 0; j < similarities[i].length; j++) {
+				similarities[i][j] = normalizedCrossCorrelation(i, j, pattern, image);
+			}
+		}
+		
+		return similarities; 
 	}
 
 }
