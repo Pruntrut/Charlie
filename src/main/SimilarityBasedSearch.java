@@ -17,7 +17,28 @@ public class SimilarityBasedSearch {
 		mean = mean/(image.length*image[0].length);
 		return mean; 
 	}
+	
 
+	/**
+	 * Computes the mean value of a gray-scale pattern in an image
+	 * @param matrix : a 2D double array, the gray-scale Image
+	 * @param row : the y coordinate of the upper left corner of the pattern
+	 * @param col : the x coordinate of the upper left corner of the pattern
+	 * @param width : the width of the pattern
+	 * @param height : the height of the pattern
+	 * @return a double value between 0 and 255 which is the mean value
+	 */
+	static double windowMean(double[][] image, int row, int col, int width, int height) {
+		double mean = 0;
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				mean = mean + image[i + col][j + row];
+			}
+		}
+		mean = mean/(width*height);
+		return mean;
+	}
+	
 	
 	/**
 	 * Computes the Normalized Cross Correlation of a gray-scale pattern if positioned
