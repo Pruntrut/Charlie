@@ -27,7 +27,7 @@ public final class ImageProcessing {
     public static int getGreen(int rgb) {
     	
     	rgb = rgb >> 8;
-    	rgb = rgb & 0b11111111;
+    	rgb = rgb & 0xff;
     	rgb = outOfLimit(rgb);
     	return rgb; 
     	
@@ -44,7 +44,7 @@ public final class ImageProcessing {
         
     public static int getBlue(int rgb) {
     	
-    	rgb = rgb & 0b11111111;
+    	rgb = rgb & 0xff;
     	rgb = outOfLimit(rgb);
     	return rgb; 
     }
@@ -85,9 +85,9 @@ public final class ImageProcessing {
     	
     	if (number < 0) {
     		number = 0;
-    		} else if (number > 255) {
-    			number = 255;
-    		}
+    	} else if (number > 255) {
+    		number = 255;
+    	}
     	return number;
     }
 
