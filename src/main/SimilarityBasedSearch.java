@@ -8,9 +8,14 @@ public class SimilarityBasedSearch {
 	 * @return a double value between 0 and 255 which is the mean value
 	 */
 	public static double mean(double[][] image) {
-		
-		// TODO implement me !
-		return -2; 
+		double mean = 0;
+		for (int i = 0; i < image.length; i++) {
+			for (int j = 0; j < image[0].length; j++) {
+				mean = mean + image[i][j];
+			}
+		}
+		mean = mean/(image.length*image[0].length);
+		return mean; 
 	}
 
 	
