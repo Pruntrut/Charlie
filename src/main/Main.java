@@ -19,8 +19,8 @@ public final class Main {
     public static void main(String[] args) {
     	testGetRed();
     	testGrayscale();
-    	//testFindNBest();
-    	//testDistanceBasedSearch();
+    	testFindNBest();
+    	testDistanceBasedSearch();
     	//testSimilarityBasedSearch();   
     	//findCharlie();
     }

@@ -53,8 +53,31 @@ public class SimilarityBasedSearch {
 	 */
 	public static double normalizedCrossCorrelation(int row, int col, double[][] pattern, double[][] image) {
 		
-		// TODO implement me !
-		return -2; 
+		double imageMean = windowMean(image, row, col, pattern.length, pattern[0].length);
+		double patternMean = mean(pattern);
+		
+		double sum = 0;
+		for (int i = 0; i < pattern.length; i++) {
+			for (int j = 0; j < pattern[0].length; j++) {
+				sum = sum + (image[i + row][j + col] - imageMean) * (pattern[i][j] - patternMean);
+			}
+		}
+		
+		double imageSum = 0;
+		for (int i = 0; i < pattern.length; i++) {
+			for (int j = 0; j < pattern[0].length; j++) {
+				imageSum = imageSum + (image[i + row][j + col] - imageMean) * (image[i + row][j + col] - imageMean);
+			}
+		}
+		
+		double patternSum = 0;
+		for (int i = 0; i < pattern.length; i++) {
+			for (int j = 0; j < pattern[0].length; j++) {
+				patternSum = patternSum + (pattern[i][j] - patternMean) * (pattern[i][j] - patternMean);
+			}
+		}
+		
+		return sum/Math.sqrt(imageSum * patternSum); 
 	}
 
 	
