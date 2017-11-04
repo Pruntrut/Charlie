@@ -3,6 +3,11 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+import com.sun.xml.internal.ws.server.provider.ProviderInvokerTube;
+
+import sun.awt.im.InputMethodJFrame;
+
 public class Collector {
 
 	/**
@@ -55,6 +60,8 @@ public class Collector {
 	 * @return an array of size n containing row, column-coordinate pairs
 	 */
 	public static int[][] findNBest(int n, double[][] matrix, boolean smallestFirst) {
+		assert n <= matrix.length * matrix[0].length;
+		
 		assert matrix.length > 0 && matrix[0].length > 0;
 		
 		double[][] copy = copyMatrix(matrix);
@@ -90,8 +97,50 @@ public class Collector {
 	 */
 	public static ArrayList<int[]> quicksortPixelCoordinates(double[][] matrix) {
 
-		// TODO implement me correctly for "underpriced" bonus!
-		return new ArrayList<int[]>();
+		ArrayList<int[]> arrayList = new ArrayList<>();
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				int[] coords = {i, j};
+				arrayList.add(coords);
+			}
+		}
+		
+		return quicksort(arrayList, matrix);
+	}
+	
+	private static ArrayList<int[]> quicksort(ArrayList<int[]> array, double[][] reference) {
+		
+		if (array.size() <= 1) {
+			return array;
+		} 
+		
+		int[] pivot = array.get(0);
+		ArrayList<int[]> smaller = new ArrayList<>();
+		ArrayList<int[]> larger = new ArrayList<>();
+		ArrayList<int[]> equal = new ArrayList<>();
+
+		
+		for (int[] item : array) {
+			double itemValue = reference[item[0]][item[1]];
+			double pivotValue = reference[pivot[0]][pivot[1]];
+			
+			if (itemValue > pivotValue) {
+				larger.add(item);
+			} else if (itemValue < pivotValue) {
+				smaller.add(item);
+			} else {
+				equal.add(item);
+			}
+		}
+		
+		ArrayList<int[]> sortedSmaller = quicksort(smaller, reference);
+		ArrayList<int[]> sortedLarger = quicksort(larger, reference);
+		ArrayList<int[]> sortedEqual = quicksort(equal, reference);
+		
+		sortedEqual.addAll(sortedLarger);
+		sortedSmaller.addAll(sortedEqual);
+		
+		return sortedSmaller;
 	}
 
 	
@@ -108,8 +157,20 @@ public class Collector {
 	 */
 	public static int[][] findNBestQuickSort(int n, double[][] matrix, boolean smallestFirst) {
 
-    	// TODO implement me correctly for underpriced bonus!
-		return new int[][]{};
+		assert n <= matrix.length * matrix[0].length;
+		
+		ArrayList<int[]> sorted = quicksortPixelCoordinates(matrix);
+		int[][] nBest = new int[n][];
+		
+		for (int i = 0; i < n; i++) {
+			if (smallestFirst) {
+				nBest[i] = sorted.get(i);
+			} else {
+				nBest[n-i-1] = sorted.get(sorted.size() - n + i);
+			}
+		}
+
+		return nBest;
 	}
 	
 	/**
