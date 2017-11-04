@@ -34,6 +34,8 @@ public class SimilarityBasedSearch {
 	static double windowMean(double[][] image, int row, int col, int width, int height) {
 		
 		assert image.length > 0 && image[0].length > 0;
+		assert row + width < image.length && col + height < image[0].length;
+
 		
 		double avg = 0;
 		for (int i = 0; i < width; i++) {
