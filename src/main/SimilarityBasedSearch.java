@@ -124,5 +124,45 @@ public class SimilarityBasedSearch {
 		
 		return similarities; 
 	}
+	
+	
+	/**
+	 * Compute the similarityMatrix between a gray-scale image and a gray-scale pattern using a specific strategy, wrapping or mirroring
+	 * @param pattern : an 2D array of doubles, the gray-scale pattern to find
+	 * @param image : an 2D array of doubles, the gray-scale image where to look for the pattern
+	 * @param strategy : a String, if equal to "wrap" or "mirror", uses respective strategy, uses default method otherwise
+	 * @return a 2D array of doubles, containing for each pixel of a original gray-scale image, 
+	 * the similarity (normalized cross-correlation) between the image's window and the pattern
+	 * placed over this pixel (upper-left corner)
+	 */
+	public static double[][] similarityMatrix(double[][] pattern, double[][] image, String strategy) {
+		
+		assert pattern.length > 0 && pattern[0].length > 0;
+		assert image.length > 0 && image[0].length > 0;
+		
+		if (!strategy.equals("wrap") && !strategy.equals("mirror")) {
+			return similarityMatrix(pattern, image);
+		}
+		
+		double[][] similarities = new double[image.length][image[0].length];
+		
+		for (int i = 0; i < similarities.length; i++) {
+			for (int j = 0; j < similarities[i].length; j++) {
+				int row, col;
+			
+				if (strategy.equals("wrap")) {
+					row = i % similarities.length;
+					col = j % similarities[i].length;
+				} else { // if strategy == "mirror"
+					row = similarities.length - 2 - (i % similarities.length);
+					col = similarities.length - 2 - (j % similarities[i].length);
+				}
+				
+				similarities[i][j] = normalizedCrossCorrelation(row, col, pattern, image);
+			}
+		}
+		
+		return similarities; 
+	}
 
 }
