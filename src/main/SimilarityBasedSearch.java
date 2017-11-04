@@ -62,6 +62,7 @@ public class SimilarityBasedSearch {
 		assert pattern.length > 0 && pattern[0].length > 0;
 		assert image.length > 0 && image[0].length > 0;
 		assert pattern.length <= image.length && pattern[0].length <= image[0].length;
+		assert row + pattern.length < image.length && col + pattern[0].length < image[0].length;
 		
 		double imageMean = windowMean(image, row, col, pattern.length, pattern[0].length);
 		double patternMean = mean(pattern);
@@ -87,7 +88,13 @@ public class SimilarityBasedSearch {
 			}
 		}
 		
-		return sum/Math.sqrt(imageSum * patternSum); 
+		double d = imageSum * patternSum;
+		
+		if (d == 0) {
+			return -1;
+		} 
+		
+		return sum/Math.sqrt(d); 
 	}
 
 	
