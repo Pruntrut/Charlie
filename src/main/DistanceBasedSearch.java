@@ -80,6 +80,47 @@ public class DistanceBasedSearch {
 	}
 	
 	/**
+	 * Compute the distanceMatrix between a RGB image and a RGB pattern according to a
+	 * specfic strategy: wrapping or mirroring
+	 * @param pattern : an 2D array of integers, the RGB pattern to find
+	 * @param image : an 2D array of integers, the RGB image where to look for the pattern
+	 * @param statergy: a String, if equal to "wrap" or "mirror", executes those strategy, uses
+	 * default method otherwise.
+	 * @return a 2D array of doubles, containing for each pixel of a original RGB image, 
+	 * the distance (meanAbsoluteError) between the image's window and the pattern
+	 * placed over this pixel (upper-left corner) 
+	 */
+	public static double[][] distanceMatrix(int[][] pattern, int[][] image, String strategy) {
+		
+		assert hasAtLeastOneElem(pattern) && hasAtLeastOneElem(image);
+		
+		if (!strategy.equals("wrap") && !strategy.equals("mirror")) {
+			return distanceMatrix(pattern, image);
+		}
+		
+		double[][] distances = new double[image.length][image[0].length];
+		
+		for (int i = 0; i < distances.length; i++) {
+			for (int j = 0; j < distances[i].length; j++) {
+				int row, col;
+				
+				if (strategy.equals("wrap")) {
+					row = i % distances.length;
+					col = j % distances[i].length;
+				} else { // if strategy == "mirror"
+					row = distances.length - 2 - (i % distances.length);
+					col = distances.length - 2 - (j % distances[i].length);
+				}
+				
+				distances[i][j] = meanAbsoluteError(row, col, pattern, image);
+			}
+		}
+    	
+		return distances;
+		
+	}
+	
+	/**
 	 * Returns true if given 2D array has at least one element
 	 * @param array : a 2D integer array
 	 * @return a boolean
