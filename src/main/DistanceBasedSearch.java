@@ -65,7 +65,7 @@ public class DistanceBasedSearch {
 	 */
 	public static double[][] distanceMatrix(int[][] pattern, int[][] image) {
 		
-		assert hasAtLeastOneElem(pattern) && hasAtLeastOneElem(pattern);
+		assert hasAtLeastOneElem(pattern) && hasAtLeastOneElem(image);
 		assert pattern.length <= image.length && pattern[0].length <= image[0].length;
 		
 		double[][] distances = new double[image.length - pattern.length + 1][image[0].length - pattern[0].length + 1];

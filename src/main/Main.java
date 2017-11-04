@@ -1,5 +1,6 @@
 package main;
 
+
 /**
  * 
  * @author Leandro Graziano, Luca Bataillard
@@ -17,12 +18,13 @@ public final class Main {
 	 */
 	
     public static void main(String[] args) {
-    	testGetRed();
-    	testGrayscale();
-    	//testFindNBest();
-    	//testDistanceBasedSearch();
-    	//testSimilarityBasedSearch();   
-    	//findCharlie();
+//    	testGetRed();
+//    	testGrayscale();
+//    	testFindNBest();
+//    	testDistanceBasedSearch();
+//    	testSimilarityBasedSearch();   
+//    	compareDistanceAndSimilarity();
+    	findCharlie();
     }
     
     /*
@@ -100,6 +102,24 @@ public final class Main {
         	Helper.drawBox(r, c, onions[0].length, onions.length, food);
     	}
     	Helper.show(food, "Found again!");    	
+    }
+    
+    public static void compareDistanceAndSimilarity() {
+		System.out.println("Compare Distance and Similarity based search");
+		int[][] image = Helper.read("images/image-dark.png");
+		int[][] pattern = Helper.read("images/pattern.png");
+		double[][] imageGray = ImageProcessing.toGray(image);
+		double[][] patternGray = ImageProcessing.toGray(pattern);
+		
+		double[][] distance = DistanceBasedSearch.distanceMatrix(pattern, image);
+		double[][] similarity = SimilarityBasedSearch.similarityMatrix(patternGray, imageGray);
+		
+		int[] bestDist = Collector.findBest(distance, true);
+		int[] bestSim = Collector.findBest(similarity, false);
+
+		Helper.drawBox(bestDist[0], bestDist[1], pattern[0].length, pattern.length, image);    	
+    	Helper.drawBox(bestSim[0], bestSim[1], pattern[0].length, pattern.length, image, pattern[0].length/15, 0x00ff00);;
+    	Helper.show(image, "Compare Dist (red) and Sim (green)");
     }
     
     public static void findCharlie() {
