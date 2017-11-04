@@ -23,8 +23,8 @@ public final class Main {
 //    	testFindNBest();
 //    	testDistanceBasedSearch();
 //    	testSimilarityBasedSearch();   
-    	compareDistanceAndSimilarity();
-//    	findCharlie();
+//    	compareDistanceAndSimilarity();
+    	findCharlie();
     }
     
     /*

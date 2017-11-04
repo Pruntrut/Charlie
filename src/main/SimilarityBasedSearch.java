@@ -61,6 +61,7 @@ public class SimilarityBasedSearch {
 		
 		assert pattern.length > 0 && pattern[0].length > 0;
 		assert image.length > 0 && image[0].length > 0;
+		assert pattern.length <= image.length && pattern[0].length <= image[0].length;
 		
 		double imageMean = windowMean(image, row, col, pattern.length, pattern[0].length);
 		double patternMean = mean(pattern);
