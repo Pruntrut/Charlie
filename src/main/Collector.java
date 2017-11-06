@@ -1,12 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-import com.sun.xml.internal.ws.server.provider.ProviderInvokerTube;
-
-import sun.awt.im.InputMethodJFrame;
 
 public class Collector {
 
