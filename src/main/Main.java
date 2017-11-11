@@ -1,5 +1,6 @@
 package main;
 
+
 /**
  * 
  * @author Leandro Graziano, Luca Bataillard
@@ -8,21 +9,15 @@ package main;
  *
  */
 public final class Main {
-
-	/* 
-	 * This class is incomplete!!
-	 * 
-	 * You are expected to write at least one testcase for each required method.
-	 * You will find some examples of testcases below.
-	 */
 	
     public static void main(String[] args) {
-    	testGetRed();
-    	testGrayscale();
-    	testFindNBest();
+//    	testGetRed();
+//    	testGrayscale();
+//    	testFindNBest();
     	testDistanceBasedSearch();
-    	//testSimilarityBasedSearch();   
-    	//findCharlie();
+    	testSimilarityBasedSearch();   
+    	compareDistanceAndSimilarity();
+    	findCharlie();
     }
     
     /*
@@ -44,10 +39,7 @@ public final class Main {
      	int[][] image = Helper.read("images/food.png");
     	double[][] gray = ImageProcessing.toGray(image);
     	Helper.show(ImageProcessing.toRGB(gray), "test bw");
-    }
-    
-    //TODO: complete
-    
+    }    
         
     /*
      * Tests for Class Collector
@@ -64,8 +56,6 @@ public final class Main {
     	}    
     }
 
-    //TODO: complete
-
     /*
      * Tests for Class DistanceBasedSearch
      */
@@ -80,16 +70,14 @@ public final class Main {
     	Helper.show(food, "Found!");
     }
     
-    //TODO: complete
-    
     /*
      * Tests for Class SimilarityBasedSearch
      */
 
     public static void testSimilarityBasedSearch() {
     	System.out.println("Test SimilarityBasedSearch");
-		int[][] food = Helper.read("images/food.png");
-    	int[][] onions = Helper.read("images/onions.png");
+		int[][] food = Helper.read("images/charlie_beach.png");
+    	int[][] onions = Helper.read("images/charlie.png");
     	double[][] foodGray = ImageProcessing.toGray(food);
     	double[][] onionsGray = ImageProcessing.toGray(onions);    	
     	double[][] similarity = SimilarityBasedSearch.similarityMatrix(onionsGray, foodGray);
@@ -100,6 +88,24 @@ public final class Main {
         	Helper.drawBox(r, c, onions[0].length, onions.length, food);
     	}
     	Helper.show(food, "Found again!");    	
+    }
+    
+    public static void compareDistanceAndSimilarity() {
+		System.out.println("Compare Distance and Similarity based search");
+		int[][] image = Helper.read("images/image-dark.png");
+		int[][] pattern = Helper.read("images/pattern.png");
+		double[][] imageGray = ImageProcessing.toGray(image);
+		double[][] patternGray = ImageProcessing.toGray(pattern);
+		
+		double[][] distance = DistanceBasedSearch.distanceMatrix(pattern, image);
+		double[][] similarity = SimilarityBasedSearch.similarityMatrix(patternGray, imageGray);
+		
+		int[] bestDist = Collector.findBest(distance, true);
+		int[] bestSim = Collector.findBest(similarity, false);
+
+		Helper.drawBox(bestDist[0], bestDist[1], pattern[0].length, pattern.length, image);    	
+    	Helper.drawBox(bestSim[0], bestSim[1], pattern[0].length, pattern.length, image, pattern[0].length/15, 0x00ff00);;
+    	Helper.show(image, "Compare Dist (red) and Sim (green)");
     }
     
     public static void findCharlie() {
@@ -122,6 +128,4 @@ public final class Main {
     	System.out.println("drawBox at (" + best[0] + "," + best[1] + ")");
     	Helper.show(beach, "Found again!");    	
     }
-    
-    //TODO: complete
 }
