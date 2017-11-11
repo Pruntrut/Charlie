@@ -6,6 +6,10 @@ public class TestSimilarityBasedSearch {
 		testMean();
 		testWindowMean();
 		testNormaizedCrossCorrelation();
+		testNCCPatternEqualImage();
+		testSimilarityPatternEqualImage();
+		testSimilaritySimple();
+		testMirrorIndex();
 		testSimilarityMatrix();
 		testSimilarityMatrix("wrap");
 		testSimilarityMatrix("mirror");
@@ -49,6 +53,50 @@ public class TestSimilarityBasedSearch {
 		}
 	}
 	
+	public static void testNCCPatternEqualImage() {     
+	  double[][] pattern = {{ 0,   0, 0 },
+	                       { 0, 255, 0 },
+	                       { 0,   0, 0 }};
+	  double similarity = SimilarityBasedSearch.normalizedCrossCorrelation(0, 0, pattern, pattern);
+	  if (similarity == 1.0) {
+	    System.out.println("Test passed");      
+	  } else {
+	    System.out.println("Test failed. Returned value = " + similarity + " Expected value = 1.0");
+	  }
+	}
+	
+	public static void testSimilarityPatternEqualImage() {     
+	  double[][] pattern = {{ 0, 255}};
+	  double[][] similarity = SimilarityBasedSearch.similarityMatrix(pattern, pattern);
+	  if (similarity.length == 1) {
+	    if (similarity[0][0] == 1.0) {
+	    	System.out.println("Test passed");  
+	    } else {
+	      System.out.println("Test failed. Expected value 1.0 but was " + similarity[0][0]);       
+	    }
+	  } else {
+	    System.out.println("Test failed. Expected length 1 but was " + similarity.length);       
+	  }
+	}
+	
+	public static void testSimilaritySimple() {
+	  double[][] image = {{ 3, 2, 2, 2 },
+	                      { 0, 3, 0, 0 }};
+	  double[][] pattern = {{ 0, 3, 0}};
+	  double[][] similarity = SimilarityBasedSearch.similarityMatrix(pattern, image);
+	 
+	  if (similarity.length == 2 && similarity[0].length == 2) {
+	    if (similarity[0][0] == -0.5 && similarity[0][1] == -1.0 &&
+	        similarity[1][0] ==  1.0 && similarity[1][1] == -0.5) {
+	    	System.out.println("Test passed");  
+	    } else {
+	      System.out.println("Test failed. Wrong values");  
+	    }
+	  } else {
+	    System.out.println("Test failed. Incorrect size");       
+	  }
+	}
+	
 	public static void testSimilarityMatrix() {
 		testSimilarityMatrix("");
 	}
@@ -80,6 +128,19 @@ public class TestSimilarityBasedSearch {
 		
 		if (!fail) {
 			System.out.println("Test passed");
+		}
+	}
+	
+	public static void testMirrorIndex() {
+		int index1 = 5;
+		int index2 = 0;
+		int result1 = SimilarityBasedSearch.mirrorIndex(index1, 4);
+		int result2 = SimilarityBasedSearch.mirrorIndex(index2, 4);
+		
+		if (result1 == 1 && result2 == 0) {
+			System.out.println("Test passed");
+		} else {
+			System.out.println("Test failed. Returned values = {" + result1 + ", " + result2 + "} Expected values = {1, 0}");
 		}
 	}
 
