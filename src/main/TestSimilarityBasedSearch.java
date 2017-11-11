@@ -7,6 +7,8 @@ public class TestSimilarityBasedSearch {
 		testWindowMean();
 		testNormaizedCrossCorrelation();
 		testSimilarityMatrix();
+		testSimilarityMatrix("wrap");
+		testSimilarityMatrix("mirror");
 	}
 	
 	public static void testMean() {		
@@ -48,12 +50,22 @@ public class TestSimilarityBasedSearch {
 	}
 	
 	public static void testSimilarityMatrix() {
+		testSimilarityMatrix("");
+	}
+	
+	public static void testSimilarityMatrix(String strategy) {
 		double[][] pattern = ImageProcessing.toGray(Helper.read("images/onions.png"));
 		int[][] image = Helper.read("images/food.png");
 		
-		double[][] grayImage = ImageProcessing.toGray(image);
+		double[][] grayImage = ImageProcessing.toGray(image);	
+		double[][] similarites;
 		
-		double[][] similarites = SimilarityBasedSearch.similarityMatrix(pattern, grayImage);
+		if (strategy.equals("wrap") || strategy.equals("mirror")) {
+			similarites = SimilarityBasedSearch.similarityMatrix(pattern, grayImage, strategy);
+		} else {
+			similarites = SimilarityBasedSearch.similarityMatrix(pattern, grayImage);
+		}
+	
 		int[] best = Collector.findBest(similarites, false);   
 		int[] ref = {456,39};
 		
