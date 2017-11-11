@@ -61,6 +61,8 @@ public class TestDistanceBasedSearch {
 		}
 	}
 	
+	
+	
 	public static void testHasAtLeastOneElem() {
 		int[][] arr1 = {{}};
 		int[][] arr2 = {{1}};
