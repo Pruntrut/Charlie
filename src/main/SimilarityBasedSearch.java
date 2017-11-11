@@ -24,7 +24,7 @@ public class SimilarityBasedSearch {
 
 	/**
 	 * Computes the mean value of a gray-scale pattern in an image
-	 * @param matrix : a 2D double array, the gray-scale Image
+	 * @param image : a 2D double array, the gray-scale Image
 	 * @param row : the y coordinate of the upper left corner of the pattern
 	 * @param col : the x coordinate of the upper left corner of the pattern
 	 * @param width : the width of the pattern
@@ -109,7 +109,7 @@ public class SimilarityBasedSearch {
 	 * placed over this pixel (upper-left corner)
 	 */
 	public static double[][] similarityMatrix(double[][] pattern, double[][] image) {
-		
+	
 		assert pattern.length > 0 && pattern[0].length > 0;
 		assert image.length > 0 && image[0].length > 0;
 		assert pattern.length <= image.length && pattern[0].length <= image[0].length;	
