@@ -9,21 +9,14 @@ package main;
  *
  */
 public final class Main {
-
-	/* 
-	 * This class is incomplete!!
-	 * 
-	 * You are expected to write at least one testcase for each required method.
-	 * You will find some examples of testcases below.
-	 */
 	
     public static void main(String[] args) {
 //    	testGetRed();
 //    	testGrayscale();
 //    	testFindNBest();
-//    	testDistanceBasedSearch();
-//    	testSimilarityBasedSearch();   
-//    	compareDistanceAndSimilarity();
+    	testDistanceBasedSearch();
+    	testSimilarityBasedSearch();   
+    	compareDistanceAndSimilarity();
     	findCharlie();
     }
     
@@ -46,10 +39,7 @@ public final class Main {
      	int[][] image = Helper.read("images/food.png");
     	double[][] gray = ImageProcessing.toGray(image);
     	Helper.show(ImageProcessing.toRGB(gray), "test bw");
-    }
-    
-    //TODO: complete
-    
+    }    
         
     /*
      * Tests for Class Collector
@@ -66,8 +56,6 @@ public final class Main {
     	}    
     }
 
-    //TODO: complete
-
     /*
      * Tests for Class DistanceBasedSearch
      */
@@ -82,16 +70,14 @@ public final class Main {
     	Helper.show(food, "Found!");
     }
     
-    //TODO: complete
-    
     /*
      * Tests for Class SimilarityBasedSearch
      */
 
     public static void testSimilarityBasedSearch() {
     	System.out.println("Test SimilarityBasedSearch");
-		int[][] food = Helper.read("images/food.png");
-    	int[][] onions = Helper.read("images/onions.png");
+		int[][] food = Helper.read("images/charlie_beach.png");
+    	int[][] onions = Helper.read("images/charlie.png");
     	double[][] foodGray = ImageProcessing.toGray(food);
     	double[][] onionsGray = ImageProcessing.toGray(onions);    	
     	double[][] similarity = SimilarityBasedSearch.similarityMatrix(onionsGray, foodGray);
@@ -142,6 +128,4 @@ public final class Main {
     	System.out.println("drawBox at (" + best[0] + "," + best[1] + ")");
     	Helper.show(beach, "Found again!");    	
     }
-    
-    //TODO: complete
 }
