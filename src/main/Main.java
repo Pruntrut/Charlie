@@ -118,7 +118,7 @@ public final class Main {
     	System.out.println("Compute Similarity Matrix: expected time about 2 min");
     	double[][] similarity = SimilarityBasedSearch.similarityMatrix(charlieGray, beachGray);
 
-    	System.out.println("Find N Best");
+    	System.out.println("Find Best");
     	int[] best = Collector.findBest(similarity, false);   
     	double max = similarity[best[0]][best[1]];
     	
