@@ -102,6 +102,11 @@ public class Collector {
 		return quicksort(arrayList, matrix);
 	}
 	
+	/** Helper function for quicksortPixelCoordinates
+	 * @param array
+	 * @param reference
+	 * @return Sorted array
+	 */
 	private static ArrayList<int[]> quicksort(ArrayList<int[]> array, double[][] reference) {
 		
 		if (array.size() <= 1) {
